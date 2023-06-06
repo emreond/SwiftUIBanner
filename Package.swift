@@ -24,8 +24,5 @@ let package = Package(
         .target(
             name: "SwiftUIBanner",
             dependencies: []),
-        .testTarget(
-            name: "SwiftUIBannerTests",
-            dependencies: ["SwiftUIBanner"]),
     ]
 )
