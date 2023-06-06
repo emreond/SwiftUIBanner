@@ -12,8 +12,8 @@ public class BannerManager: ObservableObject {
     public static let shared = BannerManager()
 
     @Published public var bannerData: BannerData?
-    var styles: BannerStyle = BannerStyle()
-    var dismissTime: Double = 2.0
+    public var styles: BannerStyle = BannerStyle()
+    public var dismissTime: Double = 2.0
 
     private var dismissalTimer: Timer?
 
