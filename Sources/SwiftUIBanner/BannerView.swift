@@ -40,10 +40,10 @@ struct BannerView: View {
                 Spacer()
             }
             .foregroundColor(Color.white)
-            .padding(12)
+            .padding(16)
             .background(style.backgroundColor)
             .cornerRadius(bannerManager.styles.cornerRadius)
-            .shadow(color: style.tintColor, radius: 5, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 15)
             Spacer()
         }
         .padding()
