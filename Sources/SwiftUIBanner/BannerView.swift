@@ -46,7 +46,7 @@ struct BannerView: View {
             .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 15)
             Spacer()
         }
-        .padding()
+        .padding(.horizontal, 16)
         .transition(AnyTransition.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
                                              removal: .move(edge: .top).combined(with: .opacity)))
         .offset(y: isDragging ? dragOffset + dragState.translation.height : 0)
