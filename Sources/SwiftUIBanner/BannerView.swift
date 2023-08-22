@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Emre Onder on 06/06/2023.
-//
-
 import Foundation
 import SwiftUI
 
@@ -16,7 +9,8 @@ struct BannerView: View {
     @State private var dragOffset: CGFloat = 0
     @State private var isDragging = false // Track drag gesture state
     @EnvironmentObject private var bannerManager: BannerManager
-    
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
+
     var style: BannerStyle.SubStyle {
         banner.type.style
     }
@@ -32,9 +26,11 @@ struct BannerView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(banner.title)
                         .font(bannerManager.styles.titleFont)
+                        .foregroundColor(style.tintColor)
                     if let subtitle = banner.subtitle {
                         Text(subtitle)
                             .font(bannerManager.styles.subtitleFont)
+                            .foregroundColor(style.tintColor)
                     }
                 }
                 Spacer()
@@ -47,6 +43,7 @@ struct BannerView: View {
             Spacer()
         }
         .padding(.horizontal, 16)
+        .padding(.top, safeAreaInsets.top)
         .transition(AnyTransition.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
                                              removal: .move(edge: .top).combined(with: .opacity)))
         .offset(y: isDragging ? dragOffset + dragState.translation.height : 0)
@@ -112,6 +109,7 @@ struct BannerModifier: ViewModifier {
                         currentBanner = nil
                     }
                 }
+                .edgesIgnoringSafeArea(.top)
             }
         }
         .onReceive(bannerManager.$bannerData) { bannerData in
@@ -120,3 +118,4 @@ struct BannerModifier: ViewModifier {
         }
     }
 }
+

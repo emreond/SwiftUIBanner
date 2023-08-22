@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct BannerStyle {
+public class BannerStyle {
     public var titleFont: Font = .body
     public var subtitleFont: Font = .body
     public var cornerRadius: CGFloat = 10.0
@@ -18,7 +18,7 @@ public struct BannerStyle {
     public var info = SubStyle(backgroundColor: .gray)
     public var warning = SubStyle(backgroundColor: .yellow)
 
-    public struct SubStyle {
+    public class SubStyle {
         public var backgroundColor: Color = .green
         public var tintColor: Color = .white
         public var icon: Image?
