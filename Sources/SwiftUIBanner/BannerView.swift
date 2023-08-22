@@ -38,6 +38,10 @@ struct BannerView: View {
                         timer?.invalidate()
                     }
                 }
+        .onDisappear {
+            timer?.invalidate()
+            timer = nil
+        }
     }
     
     private var bannerContent: some View {
