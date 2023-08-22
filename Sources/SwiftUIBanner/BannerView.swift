@@ -35,41 +35,19 @@ struct BannerView: View {
                 }
                 Spacer()
             }
-            .foregroundColor(Color.white)
             .padding(16)
-            .background(style.backgroundColor)
-            .cornerRadius(bannerManager.styles.cornerRadius)
-            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 15)
+            .background(
+                style.backgroundColor
+                    .cornerRadius(bannerManager.styles.cornerRadius)
+                    .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 15)
+            )
             Spacer()
         }
         .padding(.horizontal, 16)
         .padding(.top, safeAreaInsets.top)
         .transition(AnyTransition.asymmetric(insertion: .move(edge: .top).combined(with: .opacity),
                                              removal: .move(edge: .top).combined(with: .opacity)))
-        .offset(y: isDragging ? dragOffset + dragState.translation.height : 0)
-        .animation(.easeInOut) // Animation for appearance and disappearance
-        .gesture(
-            DragGesture()
-                .updating($dragState) { value, state, _ in
-                    state = .dragging(translation: value.translation)
-                }
-                .onChanged { _ in
-                    isDragging = true // Start tracking dragging
-                }
-                .onEnded { value in
-                    let threshold = UIScreen.main.bounds.height * 0.25
-                    if abs(value.translation.height) > threshold {
-                        withAnimation(.easeInOut) { // Add animation for dismissal
-                            onDismiss()
-                        }
-                    } else {
-                        withAnimation {
-                            isDragging = false // Stop tracking dragging
-                            dragOffset = 0
-                        }
-                    }
-                }
-        )
+        .animation(.easeInOut)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation(.easeInOut) {
